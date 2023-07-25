@@ -4,7 +4,7 @@ import logo from './Utilities/youtube.svg'
 export default function TrailerCard(props) {
   return (
     <div className='trailerCard px-0 col-1'>
-        <div className='trailerImg rounded-top d-flex justify-content-center align-items-center'>
+        <div className='trailerImg rounded-top d-flex justify-content-center align-items-center'ifcon>
             <img src={props.movieImg} className="trailer" />
             <div className="" style={{width:"15%",position:"relative"}}>
                 <a href={props.trailer}><img src={logo} style={{width:"100%"}}/></a>

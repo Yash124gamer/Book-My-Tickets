@@ -2,7 +2,10 @@ import { useState } from 'react';
 import darkLogo from './Utilities/logoDark.png';
 import { Link } from 'react-router-dom';
 import menuLogo from './Utilities/menu.svg';
-
+import userLogo from './Utilities/user.svg';
+import projectorLogo from './Utilities/projector.svg'
+import offersLogo from './Utilities/badge-percent.svg'
+import OffCanvasItem from './OffCanvasItem';
 
 export default function Navbar() {
 
@@ -53,11 +56,13 @@ export default function Navbar() {
     </nav>
     <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+          <h5 className="offcanvas-title" id="offcanvasRightLabel"></h5>
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style={{ backgroundColor: "white" }}></button>
         </div>
-        <div className="offcanvas-body">
-          This is a Right OffCanvas 
+        <div className="offcanvas-body col py-2">
+            <OffCanvasItem logo={userLogo} name={"Settings"}/>
+            <OffCanvasItem logo={offersLogo} name={"Unlock Offers"}/>
+            <OffCanvasItem logo={projectorLogo} name={"Register Your Theater"}/>
         </div>
       </div>
     </>
