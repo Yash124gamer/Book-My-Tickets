@@ -1,38 +1,152 @@
-.App {
-  text-align: center;
+body{
+    background-color: #343a40;
+}
+.component1{
+    opacity: 0;
+}
+.component2{
+    opacity: 0;
+}
+.act{
+    opacity: 1;
+}
+.navTabs{
+    display: flex;
+    justify-content: center;
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: center;
+    }
+}
+.logo{
+    margin-right: 10%;
+    display: flex;
+    justify-content: start;
+    @media (max-width: 768px) {
+        margin-left: 10%;
+    }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-link{
+    transition: background-color 0.4s ease-in;
+}
+.nav-link.active{
+    transition: background-color 0.4s ease-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.bcImg{
+    height: 35rem;
+    display: flex;
+    justify-content: start;
+    @media(max-width: 768px) {
+        height: 14rem;
+        
+        .trailerCard{
+            width:30%;
+            margin-left: 12%;
+        }
+        .trailerImg{
+            height: 90%;
+        }
+        .trailerFooter{
+            height: 10%;
+        }
+        .responsive-text {
+            font-size: 12px;
+          }
+        .movieName{
+            font-size: 13px;
+        }
+    }
 }
-
-.App-link {
-  color: #61dafb;
+.trailerCard{
+    width: 20%;
+    height: 100%;
+    margin-left: 18%;
+    position:initial
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.trailerImg{
+    height: 95%;
+    overflow: hidden;
+    position: relative;
+}
+.trailerFooter{
+    height: 5%;
+}
+.trailer{
+    position: absolute;
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+}
+/* Default style for responsive text */
+.responsive-text {
+    font-size: 22px;
+    display: block;
+    text-align: left;
+    font-family:fantasy;
+    padding-bottom: 2%;
+    font-style:italic;
+    flex-wrap: nowrap;
+    @media (max-width: 768px) {
+            font-size: 12px;
+    }
+}
+.side-menu{
+        display: inline;
+        margin-right: 2%;
+        @media (max-width: 768px) {
+            margin-top: 12%;
+    }
+}
+.castName{
+    font-size: 24px;
+    font-style: oblique;
+    font-weight: bold;
+    justify-content: center;
+    @media (max-width: 768px){
+        justify-content: start;
+        font-size: 10px;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: visible; /* Hide any overflowed text */
+        text-overflow: ellipsis; /* Add ellipsis (...) at the end if the text overflows */
+        width: 100%; /* Ensure the element takes full width on mobile */
+        padding: 0 5px; /* Add some padding to make sure text doesn't stick to the edges */
+        box-sizing: border-box;
+    }
+}
+.castRole{
+    flex-wrap: nowrap;
+    font-size: 22px;
+    @media (max-width: 768px){
+        font-size: 10px;
+    }
+}
+.heading{
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    @media (max-width: 768px){
+        font-size: large;
+    }
+}
+.movieName{
+    font-size: 25px;
+    font-style: oblique;
+    font-weight: bold;
+    padding-bottom: 8%;
+    @media (max-width: 768px) {
+        font-size: 13px;
+    }
+}
+.detailBox{
+    max-width:30%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding-top: 10%;
+    @media (max-width: 768px) {
+        padding-top:12%;
+    }
 }
