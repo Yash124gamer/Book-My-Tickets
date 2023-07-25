@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import Movie_dis from "./components/Movie_dis";
+import Login from "./components/Login";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/movies' Component={Movie_dis} />
+        <Route path="/login" Component={Login}></Route>
       </Routes>
     </Router>
     </>

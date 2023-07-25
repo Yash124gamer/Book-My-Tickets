@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import darkLogo from './Utilities/logoDark.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import menuLogo from './Utilities/menu.svg';
 import userLogo from './Utilities/user.svg';
 import projectorLogo from './Utilities/projector.svg'
@@ -9,15 +9,26 @@ import OffCanvasItem from './OffCanvasItem';
 
 export default function Navbar() {
 
-  const [activePage, setActivePage] = useState("#home");
-
-
-  const change = (event) => {
-    let id = event.target.id;
-    document.querySelector(activePage).classList.remove("active");
-    document.querySelector(`#${id}`).classList.add("active");
-    setActivePage(`#${id}`);
-  }
+  const location = useLocation()
+  
+  useEffect(() => {
+    if(location.pathname==="/"){
+      document.querySelector("#home").classList.add("active");
+      document.querySelector("#Login").classList.remove("active");
+      document.querySelector("#about").classList.remove("active");
+    }
+    if (location.pathname === "/about"){
+      document.querySelector("#about").classList.add("active");
+      document.querySelector("#home").classList.remove("active");
+      document.querySelector("#Login").classList.remove("active");
+    }
+    if (location.pathname === "/Login"){
+      document.querySelector("#Login").classList.add("active");
+      document.querySelector("#about").classList.remove("active");
+      document.querySelector("#home").classList.remove("active");
+    }
+  },)
+  
 
   return (
     <>
@@ -36,13 +47,13 @@ export default function Navbar() {
           <div className='row w-75 row2'>
             <ul className="nav nav-pills col navTabs">
               <li className="nav-item mt-3" >
-                <Link id='home' className="nav-link active" onClick={change} aria-current="page" to="/">Home</Link>
+                <Link id='home' className="nav-link "  aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item mt-3">
-                <Link className="nav-link" id='about' onClick={change} to="/about">About</Link>
+                <Link className="nav-link" id='about'  to="/about">About</Link>
               </li>
               <li className="nav-item mt-3">
-                <Link className="nav-link" id='link' onClick={change} to="/">Link</Link>
+                <Link className="nav-link" id='Login'  to="/Login" state={{selected:"Login"}}>LogIn</Link>
               </li>
             </ul>
           </div>
@@ -54,13 +65,13 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-    <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div className="offcanvas tab offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasRightLabel"></h5>
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style={{ backgroundColor: "white" }}></button>
         </div>
         <div className="offcanvas-body col py-2">
-            <OffCanvasItem logo={userLogo} name={"Settings"}/>
+            <OffCanvasItem logo={userLogo} name={"Settings"} destination={"Login"}/>
             <OffCanvasItem logo={offersLogo} name={"Unlock Offers"}/>
             <OffCanvasItem logo={projectorLogo} name={"Register Your Theater"}/>
         </div>

@@ -30,11 +30,17 @@ body{
 .nav-link{
     transition: background-color 0.4s ease-in;
 }
+.nav-link:hover{
+    border: none;
+}
 .nav-link.active{
     transition: background-color 0.4s ease-out;
 }
-
-
+.offcanvas.tab{
+    @media(max-width: 768px){
+        width: 70vw;
+    }
+}
 .bcImg{
     height: 35rem;
     display: flex;
@@ -59,6 +65,15 @@ body{
             font-size: 13px;
         }
     }
+}
+.lightDark{
+    background-color: #343a40;
+    color: white;
+}
+.nav-link.current{
+        background-color: #343a40;
+        color: white;
+        border: none;
 }
 .trailerCard{
     width: 20%;
