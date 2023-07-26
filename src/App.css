@@ -165,3 +165,18 @@ body{
         padding-top:12%;
     }
 }
+.inputBox{
+    width: 68%;
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 10%;
+    }    
+}
+.formLabel{
+    width: 10%;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    @media (max-width: 768px) {
+        width: 32%;    
+    }
+}
