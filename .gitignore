@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/Backend/credentials.js
 /Backend/node_modules
 /folder
 /node_modules
