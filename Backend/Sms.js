@@ -8,7 +8,7 @@ const client = require("twilio")(accountSid, authToken);
 
 client.verify.v2
   .services(verifySid)
-  .verifications.create({ to: "+918077294477", channel: "sms" })
+  .verifications.create({ to: "+919319212625", channel: "sms" })
   .then((verification) => console.log(verification.status))
   .then(() => {
     const readline = require("readline").createInterface({
