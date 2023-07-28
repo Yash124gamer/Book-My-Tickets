@@ -9,7 +9,7 @@ export default function Movie_dis() {
   const location = useLocation()
     const getData = async()=>{
       try {
-        const url = `http://192.168.246.229:8080/getMovieDescription/?name=${location.state.movie.name}`;
+        const url = `http://192.168.246.48:8080/bmt/getMovieDiscription/?name=${location.state.movie.name}`;
         const response = await fetch(url);
     
         if (!response.ok) {

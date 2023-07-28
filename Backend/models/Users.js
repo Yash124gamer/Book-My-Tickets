@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const { Schema } = mongoose;
 const UserSchema = new Schema({
     
     name:{
@@ -20,7 +20,7 @@ const UserSchema = new Schema({
         type:String,
         required:true,
     },
-    username:{
+    _id:{
         type:String,
         required:true,
         unique:true,

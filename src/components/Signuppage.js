@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Input from './Input';
+import { Link } from 'react-router-dom';
 
 export default function Loginpage() {
 
@@ -13,19 +14,35 @@ export default function Loginpage() {
     const [verifyState,setverifyState] = useState(false);
 
     const sendMsg = async()=>{
-          const url = `http://192.168.246.125:8080/bmt/auth/sendSMS`;
+          const url = `http://192.168.246.48:8080/bmt/auth/sendSMS`;
           const response = await fetch(url);
           setSms(true)
         }
     const checkSMS = async()=>{
-      const url = `http://192.168.246.125:8080/bmt/auth/checkSMS/?otp=${otp}`;
+      const url = `http://192.168.246.48:8080/bmt/auth/checkSMS/?otp=${otp}`;
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
       if(data.authentication==="true"){
         setverifyState(true);
       }
+    }
 
+    const saveData = ()=>{
+      fetch('http://192.168.246.48:8080/bmt/user/save', {
+        method: 'POST',
+        body: JSON.stringify({
+          "name":name,
+          "email":email,
+          "number":number,
+          "_id":username,
+          "password":pass,
+          "role":"customer"
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
     }
 
   return (
@@ -33,11 +50,11 @@ export default function Loginpage() {
             <div className="lightDark ">
             <form className="my-5">
                 {verifyState ? 
-                (<div className="row justify-content-evenly">
-                  <button type="button" className="continue btn btn-success w-25" >
+                (<Link className="row justify-content-evenly" to='/'>
+                  <button type="button" className="continue btn btn-success w-25" onClick={saveData}>
                     Continue
                   </button>
-                 </div>
+                 </Link>
                 ) : 
                 (<>
                 <Input label={"OTP-"} value={otp} set={setOtp} type={"number"} length={"4"}/>
