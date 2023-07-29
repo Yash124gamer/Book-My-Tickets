@@ -15,39 +15,47 @@ export default function Loginpage() {
 
     const sendMsg = async()=>{
           if(await checkValidation()){
-            const url = `http://192.168.168.215:8080/bmt/auth/sendSMS`;
+            const url = `http://192.168.168.29:8080/bmt/auth/sendSMS`;
             const response = await fetch(url);
             setSms(true)
           }
           
         }
     const checkSMS = async()=>{
-      const url = `http://192.168.168.215:8080/bmt/auth/checkSMS/?otp=${otp}`;
+      const url = `http://192.168.168.29:8080/bmt/auth/checkSMS/?otp=${otp}`;
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
       if(data.authentication==="true"){
         setverifyState(true);
       }
+      else{
+        alert("You Have Entered the Wrong OTP Please Try Again")
+
+      }
     }
 
     const checkValidation = ()=>{
+      console.log("In")
       const divs = document.querySelectorAll('.inputBox');
       var flag = true;
         [].forEach.call(divs, function(div) {
             if(div.value == ""){
+              div.classList.add('invalid')
               document.getElementById(`feedback_${div.id}`).style.display = 'block'
               flag = false;
             }
-            else
+            else{
               document.getElementById(`feedback_${div.id}`).style.display = 'none'
+              div.classList.remove('invalid')
+            }
         });
         return flag;
-      
     }
 
-    const saveData = ()=>{
-      fetch('http://192.168.168.215:8080/bmt/user/save', {
+
+    const saveData = async()=>{
+      const response = await fetch('http://192.168.168.29:8080/bmt/user/save', {
         method: 'POST',
         body: JSON.stringify({
           "name":name,
@@ -61,6 +69,7 @@ export default function Loginpage() {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
+      console.log(response)
     }
 
   return sms ? (
@@ -108,6 +117,7 @@ export default function Loginpage() {
           type={"text"}
           length={"20"}
           validationMessage={"Please Enter Your Name"}
+          
         />
         <Input 
         label={"Email"}
@@ -115,6 +125,7 @@ export default function Loginpage() {
         set={setEmail}
         type={"email"}
         validationMessage={"Please Enter Your Email"}
+        
         />
         <Input
           label={"Number"}
@@ -123,6 +134,7 @@ export default function Loginpage() {
           type={"number"}
           length={"10"}
           validationMessage={"Please Enter Your Number"}
+          
         />
         <Input
           label={"Username"}
@@ -131,6 +143,7 @@ export default function Loginpage() {
           type={"text"}
           length={"15"}
           validationMessage={"Please Enter Your Username"}
+          
         />
         <Input
           label={"Password"}
@@ -139,6 +152,7 @@ export default function Loginpage() {
           type={"password"}
           length={"15"}
           validationMessage={"Please Enter Your Password"}
+          
         />
         <div className="row justify-content-evenly">
           <button

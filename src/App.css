@@ -180,3 +180,14 @@ body{
         width: 32%;    
     }
 }
+.invalid{
+    border-color: red;
+    background-image: url('/home/yash/workspace/React-project/my-app/src/components/Utilities/alert-circle.svg');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: right;
+}
+.invalid:focus{
+    box-shadow:  0 0 3px 2px red;
+    background-image: none;
+}

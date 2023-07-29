@@ -61,6 +61,7 @@ export default function BootstrapCarousel() {
     }
   return (
     <>
+    <h3 style={{color:"white"}}>Whats New</h3>
   <div className="row flex-nowrap pt-2 me-0">
     <div className="col-md px-0 w-25" style={{transition:"transform 7730ms ease-in-out"}}>
      <Link to="/movies" state={{movie:imgArr.three}}>
