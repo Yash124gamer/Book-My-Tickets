@@ -3,6 +3,9 @@ const router = express.Router();
 const User = require('../models/Users')
 const { body , validationResult } = require('express-validator')
 var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+
+const JWT_SIGN = 'Yash124gamer'
 
 router.post('/save',[
           body('name','The Name Should Not be Greater Than 15 words').isLength({max:15}),
@@ -42,9 +45,10 @@ router.post('/getUser',async(req,res)=>{
     let pass = await bcrypt.compare(password,user.password)
     if(!pass)
       return res.json({error:"You Have Entered a Wrong Password"});
-    return res.json({message:"You have been Logged In"})
+    var token = await jwt.sign(JSON.stringify(user),JWT_SIGN);
+    return res.json({message:"You have been Logged In",authToken:token})
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ error: error });
   } 
 })
 
