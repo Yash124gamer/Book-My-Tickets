@@ -5,7 +5,7 @@ export default function Input(props) {
   const validate = (e)=>{
     if(e.target.value != ""){
       e.target.classList.remove('invalid')
-      document.getElementById(`feedback_${e.target.id}`).style.display = 'none'
+      document.getElementById(`feedback_${e.target.id}`).style.display = 'hidden'
     }
     else{
       e.target.classList.add('invalid')
@@ -25,7 +25,7 @@ export default function Input(props) {
           value={props.value}
           onChange={(e) =>props.set(e.target.value)}
           required
-          onKeyUp={validate}
+          onKeyUpCapture={validate}
         />
         <div className="invalid-feedback" id={`feedback_${props.label}`}>{props.validationMessage}</div>
       </div>

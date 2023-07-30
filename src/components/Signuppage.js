@@ -15,14 +15,14 @@ export default function Loginpage() {
 
     const sendMsg = async()=>{
           if(await checkValidation()){
-            const url = `http://192.168.168.29:8080/bmt/auth/sendSMS`;
+            const url = `http://localhost:8080/bmt/auth/sendSMS`;
             const response = await fetch(url);
             setSms(true)
           }
           
         }
     const checkSMS = async()=>{
-      const url = `http://192.168.168.29:8080/bmt/auth/checkSMS/?otp=${otp}`;
+      const url = `http://localhost:8080/bmt/auth/checkSMS/?otp=${otp}`;
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
@@ -36,7 +36,6 @@ export default function Loginpage() {
     }
 
     const checkValidation = ()=>{
-      console.log("In")
       const divs = document.querySelectorAll('.inputBox');
       var flag = true;
         [].forEach.call(divs, function(div) {
@@ -55,13 +54,13 @@ export default function Loginpage() {
 
 
     const saveData = async()=>{
-      const response = await fetch('http://192.168.168.29:8080/bmt/user/save', {
+      const response = await fetch('http://localhost:8080/bmt/user/save', {
         method: 'POST',
         body: JSON.stringify({
           "name":name,
           "email":email,
           "number":number,
-          "_id":username,
+          "username":username,
           "password":pass,
           "role":"customer"
         }),
