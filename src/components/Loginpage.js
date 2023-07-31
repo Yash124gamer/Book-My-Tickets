@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Input from './Input';
+import LoginContext from '../context/LoginContext';
 
 export default function Loginpage() {
-
-    const [username, setUserName] = useState({value:"",validationMsg:"Username is Required"});
-    const [pass, setPass] = useState({value:"",validationMsg:"Password is Required"});
-    const [logState, setlogState] = useState(null);
+  
+  const [username, setUserName] = useState({value:"",validationMsg:"Username is Required"});
+  const [pass, setPass] = useState({value:"",validationMsg:"Password is Required"});
+  const [loading, setloading] = useState(null);
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext); 
 
     const checkUser = async()=>{
       if(await checkValidation()){
-        setlogState("loading")
+        setloading(true)
         const response = await fetch('http://localhost:8080/bmt/user/getUser', {
           method: 'POST',
           body: JSON.stringify({
@@ -22,10 +24,14 @@ export default function Loginpage() {
         })
         const parsedData = await  response.json();
         if(parsedData.message === "You have been Logged In"){
-          setlogState("true")
+          setloading(false)
+          setIsLoggedIn({
+            LoggedIn:true,
+            authToken:parsedData.authToken
+          })
         }
         else{
-          setlogState(null);
+          setloading(null)
           if(parsedData.error === "Username Does Not Exist"){
             setUserName({value:username.value,validationMsg:parsedData.error})
           }
@@ -39,7 +45,7 @@ export default function Loginpage() {
       const divs = document.querySelectorAll('.inputBox');
       var flag = true;
         [].forEach.call(divs, function(div) {
-            if(div.value == ""){
+            if(div.value === ""){
               div.classList.add('invalid')
               document.getElementById(`feedback_${div.id}`).style.display = 'block'
               flag = false;
@@ -51,6 +57,13 @@ export default function Loginpage() {
         });
         return flag;
     }
+    const Logout = ()=>{
+      setIsLoggedIn({
+        LoggedIn:false,
+        authToken:""
+      })
+      setloading(null)
+    }
 
     useEffect(() => {
       if(username.value !="")
@@ -59,7 +72,7 @@ export default function Loginpage() {
   
 
   return (
-    (logState===null ) ? (<div className="lightDark ">
+    (isLoggedIn.LoggedIn === false && loading === null) ? (<div className="lightDark ">
     <form className="my-5">
       <Input
         label={"Username"}
@@ -80,7 +93,7 @@ export default function Loginpage() {
       <div className="row justify-content-evenly">
         <button 
           type="button" 
-          class="btn btn-primary w-25"
+          className="btn btn-primary w-25"
           onClick={checkUser}
           >
           Log In
@@ -88,11 +101,22 @@ export default function Loginpage() {
       </div>
     </form>
   </div>) : (
-      (logState === "loading") ? (<div className="lightDark d-flex justify-content-center">
+      (loading === true) ? (<div className="lightDark d-flex justify-content-center">
       <div className="spinner-border text-light" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
-    </div>) : (<div className='my-5 '>You have been Logged In</div>)
+    </div>) : (
+          <div className='my-5 '>
+            You have been Logged In {isLoggedIn.LoggedIn}
+            <button 
+              type="button" 
+              className="btn btn-sm btn-primary "
+              onClick={Logout}
+            >
+            Log Out
+            </button>
+          </div>
+          )
   )
   );
 }

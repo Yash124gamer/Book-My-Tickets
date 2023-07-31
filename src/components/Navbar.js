@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import darkLogo from './Utilities/logoDark.png';
 import { Link, useLocation } from 'react-router-dom';
 import menuLogo from './Utilities/menu.svg';
@@ -6,11 +6,13 @@ import userLogo from './Utilities/user.svg';
 import projectorLogo from './Utilities/projector.svg'
 import offersLogo from './Utilities/badge-percent.svg'
 import OffCanvasItem from './OffCanvasItem';
+import LoginContext from '../context/LoginContext';
 
 export default function Navbar() {
 
   const location = useLocation()
-  
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+
   useEffect(() => {
     if(location.pathname==="/"){
       document.querySelector("#home").classList.add("active");
@@ -53,7 +55,7 @@ export default function Navbar() {
                 <Link className="nav-link" id='about'  to="/about">About</Link>
               </li>
               <li className="nav-item mt-3">
-                <Link className="nav-link" id='Login'  to="/Login" state={{selected:"Login"}}>LogIn</Link>
+                <Link className="nav-link" id='Login'  to="/Login" state={{selected:"Login"}}>{isLoggedIn.LoggedIn ? "Log Out" : "Log In"}</Link>
               </li>
             </ul>
           </div>

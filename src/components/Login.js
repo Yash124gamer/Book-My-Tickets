@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import Loginpage from './Loginpage';
 import Signuppage from './Signuppage';
+import LoginContext from '../context/LoginContext';
 
 export default function Login() {
 
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
     const location = useLocation()
     useEffect(() => {
         document.querySelector(`.${location.state.selected}`).classList.add("current")
@@ -26,6 +28,7 @@ export default function Login() {
               <Link
                 className="nav-link Login"
                 aria-current="true"
+                style={{ color: "white" }}
                 to="/Login"
                 state={{ selected: "Login" }}
               >
@@ -39,7 +42,8 @@ export default function Login() {
             </li>
             <li className="nav-item">
               <Link
-                className="nav-link Signin"
+                className={`nav-link Signin ${isLoggedIn.LoggedIn ? "disabled":""}`} 
+                style={{color:"white"}}
                 to="/Login"
                 state={{ selected: "Signin" }}
               >
