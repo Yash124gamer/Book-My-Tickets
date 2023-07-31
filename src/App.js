@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Home from "./components/Home";
 import About from "./components/About";
+import {LoginProvider} from './context/LoginContext';
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+    <LoginProvider>
     <Router>
         <Navbar/>
       <Routes>
@@ -25,6 +27,7 @@ function App() {
         <Route path="/login" Component={Login}></Route>
       </Routes>
     </Router>
+    </LoginProvider>
     </>
   );
 }
