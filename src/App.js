@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Movie_dis from "./components/Movie_dis";
 import Login from "./components/Login";
+import Settings from "./components/Settings";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path='/about' element={<About/>} />
         <Route path='/movies' Component={Movie_dis} />
         <Route path="/login" Component={Login}></Route>
+        <Route path="/settings" Component={Settings}></Route>
       </Routes>
     </Router>
     </LoginProvider>
