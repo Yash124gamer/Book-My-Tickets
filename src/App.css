@@ -194,3 +194,7 @@ body{
 h3,h5{
     font-weight: bold;
 }
+.listItems:hover{
+    background-color: #343a40;
+    transition: background-color 0.4s ease-in-out;
+}
