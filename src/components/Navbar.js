@@ -73,7 +73,7 @@ export default function Navbar() {
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style={{ backgroundColor: "white" }}></button>
         </div>
         <div className="offcanvas-body col py-2">
-            <OffCanvasItem logo={userLogo} name={"Settings"} destination={"Login"}/>
+            <OffCanvasItem logo={userLogo} name={"Settings"} destination={"Settings"}/>
             <OffCanvasItem logo={offersLogo} name={"Unlock Offers"}/>
             <OffCanvasItem logo={projectorLogo} name={"Register Your Theater"}/>
         </div>
